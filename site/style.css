@@ -1,0 +1,106 @@
+body{
+margin:0;
+font-family:Arial;
+background:#0f172a;
+color:white;
+}
+
+canvas{
+position:fixed;
+top:0;
+left:0;
+z-index:-1;
+}
+
+header{
+text-align:center;
+padding:20px;
+background:#020617;
+}
+
+nav a{
+margin:10px;
+color:#38bdf8;
+text-decoration:none;
+transition:0.3s;
+}
+
+nav a:hover{
+color:white;
+}
+
+section{
+margin:40px auto;
+width:80%;
+background:#1e293b;
+padding:20px;
+border-radius:10px;
+transition:0.3s;
+}
+
+section:hover{
+transform:translateY(-5px);
+box-shadow:0 10px 20px rgba(0,0,0,0.4);
+}
+
+pre{
+background:#020617;
+padding:15px;
+border-radius:5px;
+}
+
+button{
+padding:10px;
+cursor:pointer;
+}
+
+#respostas button{
+display:block;
+width:100%;
+margin:5px 0;
+}
+
+.certo{
+background:#22c55e !important;
+}
+
+.errado{
+background:#ef4444 !important;
+}
+
+.editor-wrapper{
+display:flex;
+}
+
+#linhas{
+background:#020617;
+padding:10px;
+color:#64748b;
+font-family:monospace;
+text-align:right;
+}
+
+#editorCode{
+width:100%;
+height:200px;
+background:#020617;
+color:white;
+font-family:monospace;
+border:none;
+padding:10px;
+}
+
+#console{
+background:#020617;
+padding:10px;
+margin-top:10px;
+}
+
+.console-line{
+animation:fade 0.4s;
+}
+
+@keyframes fade{
+from{opacity:0}
+to{opacity:1}
+}

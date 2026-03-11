@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Pistolona Dev</title>
+
+<style>
+
+body{
+margin:0;
+height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+font-family:Arial;
+background:#0f172a;
+overflow:hidden;
+color:white;
+}
+
+canvas{
+position:fixed;
+top:0;
+left:0;
+z-index:-1;
+}
+
+.loginBox{
+
+background:rgba(30,41,59,0.8);
+padding:40px;
+border-radius:12px;
+width:320px;
+text-align:center;
+backdrop-filter:blur(10px);
+box-shadow:0 0 30px rgba(0,0,0,0.5);
+
+}
+
+.loginBox h1{
+margin-bottom:10px;
+color:#38bdf8;
+}
+
+.loginBox p{
+margin-bottom:20px;
+color:#cbd5f5;
+}
+
+input{
+
+width:100%;
+padding:10px;
+margin-bottom:15px;
+border:none;
+border-radius:6px;
+background:#020617;
+color:white;
+
+}
+
+button{
+
+width:100%;
+padding:10px;
+border:none;
+border-radius:6px;
+background:#38bdf8;
+color:black;
+cursor:pointer;
+font-weight:bold;
+transition:0.3s;
+
+}
+
+button:hover{
+
+background:#0ea5e9;
+transform:scale(1.05);
+
+}
+
+#erro{
+color:#ef4444;
+margin-top:10px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<canvas id="particles"></canvas>
+
+<div class="loginBox">
+
+<h1>Pistolona Dev</h1>
+
+<p>Aprenda programação do zero</p>
+
+<input id="user" placeholder="Usuário">
+<input id="pass" type="password" placeholder="Senha">
+
+<button onclick="login()">Entrar</button>
+
+<p id="erro"></p>
+
+</div>
+
+<script>
+
+/* LOGIN */
+
+function login(){
+
+let user=document.getElementById("user").value
+let pass=document.getElementById("pass").value
+
+if(user=="" || pass==""){
+
+document.getElementById("erro").innerText="Preencha todos os campos"
+return
+
+}
+
+localStorage.setItem("usuario",user)
+
+window.location.href="index.html"
+
+}
+
+/* PARTICULAS */
+
+const canvas=document.getElementById("particles")
+const ctx=canvas.getContext("2d")
+
+canvas.width=window.innerWidth
+canvas.height=window.innerHeight
+
+let particles=[]
+
+for(let i=0;i<80;i++){
+
+particles.push({
+
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+vx:(Math.random()-0.5)*0.6,
+vy:(Math.random()-0.5)*0.6
+
+})
+
+}
+
+function animate(){
+
+ctx.clearRect(0,0,canvas.width,canvas.height)
+
+particles.forEach(p=>{
+
+p.x+=p.vx
+p.y+=p.vy
+
+ctx.beginPath()
+ctx.arc(p.x,p.y,2,0,Math.PI*2)
+ctx.fillStyle="#38bdf8"
+ctx.fill()
+
+})
+
+for(let i=0;i<particles.length;i++){
+
+for(let j=i+1;j<particles.length;j++){
+
+let dx=particles[i].x-particles[j].x
+let dy=particles[i].y-particles[j].y
+
+let dist=Math.sqrt(dx*dx+dy*dy)
+
+if(dist<120){
+
+ctx.beginPath()
+ctx.moveTo(particles[i].x,particles[i].y)
+ctx.lineTo(particles[j].x,particles[j].y)
+ctx.strokeStyle="rgba(56,189,248,0.15)"
+ctx.stroke()
+
+}
+
+}
+
+}
+
+requestAnimationFrame(animate)
+
+}
+
+animate()
+
+</script>
+
+</body>
+</html>
